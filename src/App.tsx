@@ -1,11 +1,15 @@
-import './App.css'
+import './App.scss'
+import Header from './components/header';
 
 const App = () => {
 
   return (
-    <>
-      <p>Basic boilerplate</p>
-    </>
+    <div>
+      <Header />
+
+      <div className='booking-container'>
+      </div>
+    </div>
   )
 }
 
