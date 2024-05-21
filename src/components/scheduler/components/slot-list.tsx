@@ -1,8 +1,7 @@
-import { formatTime, formatTimestampToDateString } from "../../helpers/date";
-import { Slot } from "../scheduler/types";
-import { SlotSectionProps } from "./types";
+import { formatTime, formatTimestampToDateString } from "../../../helpers/date";
+import { Slot, SlotListProps } from "../types";
 
-const SlotSection = (props: SlotSectionProps) => {
+const SlotList = (props: SlotListProps) => {
 
     const { timestamp, slots, selectedSlot, chooseSlot } = props;
     return (
@@ -10,7 +9,7 @@ const SlotSection = (props: SlotSectionProps) => {
             <div className='slot-date'>
                 {formatTimestampToDateString(timestamp!)} - Available Slots
             </div>
-            
+
             {slots && slots.length > 0 &&
                 <div className='slots'>
                     {slots.map((slot: Slot, idx: number) => {
@@ -33,4 +32,4 @@ const SlotSection = (props: SlotSectionProps) => {
     );
 };
 
-export default SlotSection;
+export default SlotList;

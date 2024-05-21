@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Fragment } from "react";
 import Select from 'react-select';
-import { VariantProps, VariantOptions } from "./types";
+import { VariantProps, VariantOptions } from "../types";
 
 const Variant = (props: VariantProps) => {
 

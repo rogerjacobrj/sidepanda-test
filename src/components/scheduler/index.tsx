@@ -1,13 +1,15 @@
-import Calendar from 'react-calendar';
 import { useEffect, useState } from 'react';
-import Variant from '../variant';
 import {
     getNextDayTimestamp, convertTimestampToDate,
     convertDateStringToTimestamp, calculateDuration
 } from '../../helpers/date';
-import { VariantOptions } from '../variant/types';
+import { VariantOptions } from './types';
 import { DateValue, Slot, SelctedSlot } from "./types";
-import SlotSection from '../slot-section';
+import BookingDetails from './components/booking-details';
+import CalendarSection from './components/calendar';
+import Footer from './components/footer';
+import SlotSection from './components/slot-section';
+import "./styles.scss";
 
 const Scheduler = () => {
 
@@ -15,9 +17,10 @@ const Scheduler = () => {
     const [timestamp, setTimestamp] = useState<number | null>(null);
 
     const [loading, setLoading] = useState<boolean>(false);
+    const [showDetailsPage, setShowDetailsPage] = useState<boolean>(false);
     const [slots, setSlots] = useState<Slot[]>([]);
     const [slotsData, setSlotsData] = useState<Slot[]>([]);
-    const [variant, setVariant] = useState<number>(60);
+    const [variant, setVariant] = useState<VariantOptions>({ label: '1 Hour', value: 60 });
     const [selectedSlot, setSelectedSlot] = useState<SelctedSlot | null>(null);
 
     const getStarted = (): void => {
@@ -28,6 +31,7 @@ const Scheduler = () => {
     const onDateSelect = (value: DateValue): void => {
         setDate(value);
         setTimestamp(convertDateStringToTimestamp(value!.toString()));
+        setSelectedSlot(null);
     };
 
     useEffect(() => {
@@ -74,14 +78,14 @@ const Scheduler = () => {
     };
 
     const onVariantSelect = (variant: VariantOptions): void => {
-        setVariant(variant.value);
+        setVariant(variant);
     };
 
     useEffect(() => {
         if (variant) {
             const slots = slotsData.filter(slot => {
                 const duration = calculateDuration(slot);
-                return duration === variant;
+                return duration === variant.value;
             });
 
             setSlots(slots);
@@ -89,63 +93,55 @@ const Scheduler = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [variant]);
 
+    const toggleDetailsPage = () => {
+        setShowDetailsPage(!showDetailsPage);
+    };
+
+    const scheduleEvent = () => {
+        setDate(null);
+        setTimestamp(null);
+        setShowDetailsPage(false);
+        setSlots([]);
+        setSlotsData([]);
+        setSelectedSlot(null);
+    };
+
     return (
         <div className='booking-wrapper'>
             <div className='booking-container'>
-                <div className='calendar-slot-wrapper'>
-                    <div className='calendar'>
-                        <div className='calendar-title'>Test Service</div>
-                        <p className='calendar-timezone'><b>Timezone:</b> Asia/Calcutta</p>
-                        <div className='calendar-input'>
-                            <Calendar
-                                calendarType="hebrew"
-                                minDate={new Date()}
-                                tileClassName="custom-calendar-title"
-                                onChange={onDateSelect} value={date} />
-                        </div>
-                    </div>
-                    <div className='time-slot'>
-                        {date && !loading && <div className='progress-content'>
-                            <div className='variant-selection'>
-                                <Variant
-                                    label="Select from variants"
-                                    placeholder="Choose variant"
-                                    onVariantSelect={onVariantSelect}
-                                    value={variant}
-                                />
-                            </div>
-                            <div className='divider'></div>
-                            <SlotSection
-                                timestamp={timestamp}
-                                slots={slots}
-                                selectedSlot={selectedSlot}
-                                chooseSlot={chooseSlot}
-                            />
-                        </div>}
+                {!showDetailsPage ? <div className='calendar-slot-wrapper'>
+                    <CalendarSection
+                        onDateSelect={onDateSelect}
+                        date={date}
+                    />
 
-                        {date && loading && <div className='loader-wrapper'>
-                            <div className="loader"></div>
-                        </div>}
+                    <SlotSection
+                        date={date}
+                        loading={loading}
+                        variant={variant}
+                        onVariantSelect={onVariantSelect}
+                        timestamp={timestamp!}
+                        slots={slots}
+                        selectedSlot={selectedSlot!}
+                        chooseSlot={chooseSlot}
+                        getStarted={getStarted}
+                    />
+                </div>
+                    :
+                    <BookingDetails
+                        duration={variant.label}
+                        selectedSlot={selectedSlot!}
+                        goBack={toggleDetailsPage}
+                        scheduleEvent={scheduleEvent}
+                        timestamp={timestamp!}
+                    />}
 
-                        {!date && slots.length === 0 &&
-                            <div className='get-started'>
-                                <p>Choose a date and time to schedule the appointment</p>
-                                <button
-                                    className='start-button'
-                                    onClick={getStarted}>
-                                    Get Started
-                                </button>
-                            </div>}
-                    </div>
-                </div>
-                <div className='calendar-footer'>
-                    <div className='author'>Powered by <a href=''>Appointo</a></div>
-                    <div className='footer-btn'>
-                        {selectedSlot && <button className='next-btn'>
-                            Next <i className="arrow right"></i>
-                        </button>}
-                    </div>
-                </div>
+                <Footer
+                    slots={slots}
+                    selectedSlot={selectedSlot!}
+                    showDetailsPage={showDetailsPage}
+                    toggleDetailsPage={toggleDetailsPage}
+                />
             </div>
         </div>
     );

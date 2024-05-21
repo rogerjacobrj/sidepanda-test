@@ -28,12 +28,17 @@ export const convertDateStringToTimestamp = (dateString: string): number | null 
     }
 };
 
-export const formatTimestampToDateString = (timestampInMs: number): string => {
+export const formatTimestampToDateString = (timestampInMs: number, includeYear: boolean = false): string => {
     const dateObject = new Date(timestampInMs);
     const weekday = dateObject.toLocaleDateString('en-US', { weekday: 'long' });
     const monthDay = dateObject.toLocaleDateString('en-US', { day: 'numeric', month: 'long' });
+    const year = dateObject.getFullYear();
 
-    return `${weekday}, ${monthDay}`;
+    if (includeYear) {
+        return `${weekday}, ${monthDay}, ${year}`;
+    } else {
+        return `${weekday}, ${monthDay}`;
+    }
 };
 
 export const formatTime = (timeString: string): string => {
