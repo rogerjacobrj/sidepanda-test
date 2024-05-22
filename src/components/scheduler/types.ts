@@ -41,6 +41,7 @@ export type SlotSectionProps = {
     selectedSlot: SelctedSlot;
     chooseSlot: (slot: Slot, index: number) => void;
     getStarted: () => void;
+    error: Error | null;
 };
 
 export type VariantProps = {

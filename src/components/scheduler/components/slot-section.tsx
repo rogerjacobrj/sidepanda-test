@@ -5,11 +5,11 @@ import SlotList from './slot-list';
 const SlotSection = (props: SlotSectionProps) => {
 
     const { date, loading, variant, onVariantSelect, timestamp,
-        slots, selectedSlot, chooseSlot, getStarted } = props;
+        slots, selectedSlot, chooseSlot, getStarted, error } = props;
 
     return (
         <div className='time-slot'>
-            {date && !loading && <div className='progress-content'>
+            {date && !loading && !error && <div className='progress-content'>
                 <div className='variant-selection'>
                     <Variant
                         label="Select from variants"
@@ -39,6 +39,11 @@ const SlotSection = (props: SlotSectionProps) => {
                         onClick={getStarted}>
                         Get Started
                     </button>
+                </div>}
+
+            {date && slots.length === 0 && error &&
+                <div className='slot-error'>
+                    <p>{error.message}</p>
                 </div>}
         </div>
     );

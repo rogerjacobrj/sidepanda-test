@@ -22,6 +22,7 @@ const Scheduler = () => {
     const [slotsData, setSlotsData] = useState<Slot[]>([]);
     const [variant, setVariant] = useState<VariantOptions>({ label: '1 Hour', value: 60 });
     const [selectedSlot, setSelectedSlot] = useState<SelctedSlot | null>(null);
+    const [error, setError] = useState<Error | null>(null);
 
     const getStarted = (): void => {
         setDate(new Date());
@@ -49,7 +50,9 @@ const Scheduler = () => {
 
     const fetchTimeSlots = async (startDate: string, endDate: string): Promise<void> => {
         try {
+            setError(null);
             setLoading(true);
+
             const response = await fetch(`https://app.appointo.me/scripttag/mock_timeslots?start_date=${startDate}&end_date=${endDate}`);
             if (!response.ok) {
                 throw new Error("Failed to load appointment slots");
@@ -62,9 +65,9 @@ const Scheduler = () => {
                 setSlots(slots);
                 setSlotsData(slots);
             }
-        } catch (error) {
-            console.log(error);
-
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        } catch (error: any) {
+            setError(error);
         } finally {
             setLoading(false);
         }
@@ -125,6 +128,7 @@ const Scheduler = () => {
                         selectedSlot={selectedSlot!}
                         chooseSlot={chooseSlot}
                         getStarted={getStarted}
+                        error={error}
                     />
                 </div>
                     :
