@@ -1,30 +1,55 @@
-# React + TypeScript + Vite
+# Appoinment Booking Screen (React + TypeScript + Vite)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Develop a dynamic appointment booking screen for Sidepanda using React
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+The appointment booking application has been developed with the following features
 
-## Expanding the ESLint configuration
+- The users can choose between dates by using the calendar.
+- The users can choose a 30-minute or 1-hour event.
+- The users can select a timeslot and proceed to book an appointment.
+- An appointment is scheduled once the user enters their name & email address.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Preview
 
-- Configure the top-level `parserOptions` property like this:
+The application can be accessed using the following links
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+- Visit [sidepanda appointment scheduler](https://sidepanda.rogerjacob.com) to view the application online
+- Navigate to [localhost](http://localhost:5173) to view the application locally
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## Run application locally
+
+Follow the below steps to configure and run the application locally
+
+---
+## Requirements
+
+For development, you will only need Node.js and npm, installed in your environment.
+
+### Node
+- #### Node installation
+  You can find more information about the installation on the [official Node.js website](https://nodejs.org/) and the [official NPM website](https://npmjs.org/).
+
+If the installation is successful, you should be able to run the following command.
+
+    $ node --version
+    v20.11.1
+
+    $ npm --version
+    10.2.4
+---
+
+## Install
+
+    $ git clone https://github.com/rogerjacobrj/sidepanda-test
+    $ cd sidepanda-test
+    $ npm install
+
+## Running the project
+
+    $ npm run dev
+
+## Simple build for production
+
+    $ npm run build
