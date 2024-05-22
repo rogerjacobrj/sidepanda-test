@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import "./styles.scss";
+import { Link } from "react-router-dom";
 
 const Header = () => {
     const [isOpen, setMenuState] = useState(false);
@@ -44,7 +45,9 @@ const Header = () => {
     return (
         <div className='main-header'>
             <div className='logo-section'>
-                <img src="./logo.png" alt="Sidepanda" className='logo' />
+                <Link to="/">
+                    <img src="./logo.png" alt="Sidepanda" className='logo' />
+                </Link>
             </div>
 
             <div className='navigation'>
@@ -59,32 +62,37 @@ const Header = () => {
                     ref={mobileNavBar}
                     onAnimationEnd={() => removeAnimationClasses()}>
                     <ul>
-                        <li><a href="#">About us</a></li>
-                        <li><a href="#">Leadership</a></li>
-                        <li><a href="#">Contact us</a></li>
+                        <li><Link to="/about-us">About us</Link></li>
+                        <li><Link to="/leadership">Leadership</Link></li>
+                        <li><Link to="/contact-us">Contact us</Link></li>
                         <li>
-                            <button className="outline-button">
-                                <img src="./link.svg" alt="Share Link"
-                                    className='link-icon' /> Share Link
-                            </button>
+                            <Link to="https://www.sidepanda.com" target="_blank">
+                                <button className="outline-button">
+                                    <img src="./link.svg" alt="Share Link"
+                                        className='link-icon' /> Share Link
+                                </button>
+                            </Link>
                         </li>
                     </ul>
                 </div>
                 <nav>
                     <ul>
                         <li className="dropdown">
-                            <a href="#">Menu <i className="arrow down"></i></a>
+                            <Link to="">Menu <i className="arrow down"></i></Link>
                             <ul className="dropdown-content">
-                                <li><a href="#">About us</a></li>
-                                <li><a href="#">Leadership</a></li>
+                                <li><Link to="/about-us">About us</Link></li>
+                                <li><Link to="/leadership">Leadership</Link></li>
                             </ul>
                         </li>
-                        <li><a href="#">Contact us</a></li>
+                        <li><Link to="/contact-us">Contact us</Link></li>
                         <li>
-                            <button className="outline-button">
-                                <img src="./link.svg" alt="Link"
-                                    className='link-icon' /> Share Link
-                            </button>
+                            <Link to="https://www.sidepanda.com" target="_blank">
+                                <button className="outline-button">
+                                    <img src="./link.svg" alt="Link"
+                                        className='link-icon' /> Share Link
+                                </button>
+                            </Link>
+
                         </li>
                     </ul>
                 </nav>

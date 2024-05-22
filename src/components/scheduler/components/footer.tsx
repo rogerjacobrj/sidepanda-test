@@ -1,4 +1,5 @@
 import { FooterProps } from "../types";
+import { Link } from "react-router-dom";
 
 const Footer = (props: FooterProps) => {
 
@@ -6,7 +7,9 @@ const Footer = (props: FooterProps) => {
 
     return (
         <div className='calendar-footer'>
-            <div className='author'>Powered by <a href=''>Appointo</a></div>
+            <div className='author'>
+                Powered by <Link to='https://www.sidepanda.com/appointo' target="_blank">Appointo</Link>
+            </div>
             <div className='footer-btn'>
                 {slots.length > 0 && selectedSlot && !showDetailsPage &&
                     <button className='next-btn' onClick={toggleDetailsPage}>
