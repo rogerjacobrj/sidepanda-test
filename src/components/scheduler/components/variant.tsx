@@ -23,10 +23,10 @@ const Variant = (props: VariantProps) => {
             ...base,
             background: '#FFFFFF',
             borderColor: '#C7C9D9',
-            minHeight: '48px',
-            height: '48px',
-            borderRadius: '10px',
-            fontSize: '14px'
+            minHeight: '3rem',
+            height: '3rem',
+            borderRadius: '0.625rem',
+            fontSize: '0.875rem'
         }),
         option: (base: any, state: any) => ({
             ...base,
@@ -43,7 +43,7 @@ const Variant = (props: VariantProps) => {
         placeholder: (base: any) => {
             return {
                 ...base,
-                fontSize: '14px'
+                fontSize: '0.875rem'
             }
         }
     };
