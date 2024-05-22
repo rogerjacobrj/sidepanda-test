@@ -4,7 +4,6 @@ const Footer = (props: FooterProps) => {
 
     const { slots, selectedSlot, showDetailsPage, toggleDetailsPage } = props;
 
-
     return (
         <div className='calendar-footer'>
             <div className='author'>Powered by <a href=''>Appointo</a></div>

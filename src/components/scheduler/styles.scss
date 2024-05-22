@@ -1,13 +1,13 @@
 .booking-detail-wrapper {
     min-height: 350px;
     display: flex;
+    flex-direction: column;
 
     .event-details {
         background-color: #EBEBF0;
         border-top-left-radius: 12px;
+        border-top-right-radius: 12px;
         padding: 0 40px 40px 40px;
-        min-width: 400px;
-        max-width: 400px;
 
         .event-title {
             font-size: 24px;
@@ -23,7 +23,7 @@
             font-weight: 500;
             line-height: 21px;
             text-align: left;
-            margin: 10px 0 20px 0;
+            margin: 10px 0 0px 0;
         }
 
         .event-date {
@@ -36,13 +36,11 @@
     }
 
     .detail-input-wrapper {
-        min-width: 400px;
-        max-width: 400px;
         background-color: #FFFFFF;
         padding: 40px;
 
         .title {
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 600;
             margin-bottom: 26px;
         }
@@ -54,6 +52,7 @@
 
             label {
                 margin-bottom: 6px;
+                font-size: 14px;
             }
 
             .form-control {
@@ -64,6 +63,7 @@
                 &::placeholder {
                     font-family: "Poppins", sans-serif;
                     font-weight: 400;
+                    font-size: 13px;
                 }
             }
 
@@ -112,8 +112,6 @@
     }
 
     .confirmation-content {
-        min-width: 400px;
-        max-width: 400px;
         background-color: #FFFFFF;
         padding: 40px;
         display: flex;
@@ -130,6 +128,27 @@
             line-height: 24px;
             color: #FFF;
             background-color: #378760;
+        }
+    }
+}
+
+@media (min-width: 992px) {
+    .booking-detail-wrapper {
+        flex-direction: row;
+
+        .event-details {
+            min-width: 400px;
+            max-width: 400px;
+        }
+
+        .detail-input-wrapper {
+            min-width: 400px;
+            max-width: 400px;
+        }
+
+        .confirmation-content {
+            min-width: 400px;
+            max-width: 400px;
         }
     }
 }

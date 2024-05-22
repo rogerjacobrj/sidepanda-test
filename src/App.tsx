@@ -9,6 +9,6 @@ const App = () => {
       <Scheduler />
     </div>
   )
-}
+};
 
 export default App;
