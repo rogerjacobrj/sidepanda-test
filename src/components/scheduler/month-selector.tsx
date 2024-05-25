@@ -40,7 +40,8 @@ const Scheduler = () => {
             setDate(new Date(startDateData.date));
             setSlots(startDateData.slots);
             setSlotsData(startDateData.slots);
-            const timestamp: string = startDateData.date.toLocaleString();
+            const timestamp = convertDateStringToTimestamp(startDateData.date.toLocaleString());
+
             setTimestamp(Number(timestamp));
             setMonthSelection(false);
         }
