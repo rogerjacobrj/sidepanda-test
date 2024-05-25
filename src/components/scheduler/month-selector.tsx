@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useState } from 'react';
 import {
-    getNextDayTimestamp, convertTimestampToDate,
-    convertDateStringToTimestamp, calculateDuration,
+    convertTimestampToDate, convertDateStringToTimestamp,
+    calculateDuration, daysInMonth, getFirstDayOfMonth
 } from '../../helpers/date';
-import { VariantOptions } from './types';
+import { VariantOptions, MonthData } from './types';
 import { DateValue, Slot, SelctedSlot } from "./types";
 import BookingDetails from './components/booking-details';
 import CalendarSection from './components/calendar';
@@ -24,30 +24,62 @@ const Scheduler = () => {
     const [variant, setVariant] = useState<VariantOptions>({ label: '1 Hour', value: 60 });
     const [selectedSlot, setSelectedSlot] = useState<SelctedSlot | null>(null);
     const [error, setError] = useState<Error | null>(null);
+    const [monthData, setMonthData] = useState<MonthData[] | null>(null);
+    const [lastDayTimestamp, setLastDayTimestamp] = useState<number | null>(null);
+    const [isMonthSelection, setMonthSelection] = useState<boolean>(false);
 
     const getStarted = (): void => {
         setDate(new Date());
         setTimestamp(new Date().getTime());
-    };
-
-    const onDateSelect = (value: DateValue): void => {
-        setDate(value);
-        setTimestamp(convertDateStringToTimestamp(value!.toString()));
-        setSelectedSlot(null);
+        onDateSelect(new Date());
     };
 
     useEffect(() => {
-        if (date) {
-            const today = convertTimestampToDate(timestamp!);
-
-            const nextDayTimestamp = getNextDayTimestamp(timestamp!);
-
-            const tomorrow = convertTimestampToDate(nextDayTimestamp);
-
-            fetchTimeSlots(today, tomorrow);
+        if (monthData && isMonthSelection) {
+            const startDateData = monthData[0];
+            setDate(new Date(startDateData.date));
+            setSlots(startDateData.slots);
+            setSlotsData(startDateData.slots);
+            const timestamp: string = startDateData.date.toLocaleString();
+            setTimestamp(Number(timestamp));
+            setMonthSelection(false);
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [date]);
+    }, [monthData, isMonthSelection]);
+
+    useEffect(() => {
+        if (date && monthData && monthData.length > 0) {
+            for (let i = 0; i < monthData.length; i++) {
+                const timestamp = convertDateStringToTimestamp(date.toString());
+                if (convertTimestampToDate(timestamp!) === monthData[i].date.toString().toLocaleString()) {
+                    setSlots(monthData[i].slots);
+                    setSlotsData(monthData[i].slots);
+                }
+            }
+        }
+    }, [date, monthData]);
+
+    const onDateSelect = (value: any): void => {
+
+        setSelectedSlot(null);
+
+        const lastDay = new Date(value.getFullYear(),
+            value.getMonth(), daysInMonth(value.getMonth() + 1,
+                value.getFullYear()));
+
+        const monthEndTimestamp = convertDateStringToTimestamp(lastDay.toString());
+        setLastDayTimestamp(monthEndTimestamp);
+
+        if (Number(lastDayTimestamp) !== Number(monthEndTimestamp)) {
+            const startOfMonth = getFirstDayOfMonth(monthEndTimestamp!);
+            const start = convertTimestampToDate(startOfMonth!);
+            const end = convertTimestampToDate(monthEndTimestamp!);
+            setMonthData(null);
+            fetchTimeSlots(start, end);
+        }
+
+        setDate(new Date(value));
+        setTimestamp(new Date(value).getTime());
+    };
 
     const fetchTimeSlots = async (startDate: string, endDate: string): Promise<void> => {
         try {
@@ -61,11 +93,10 @@ const Scheduler = () => {
 
             const data = await response.json();
 
-            if (data && data.length) {
-                const { slots } = data[0];
-                setSlots(slots);
-                setSlotsData(slots);
+            if (data) {
+                setMonthData(data);
             }
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (error: any) {
             setError(error);
         } finally {
@@ -109,6 +140,23 @@ const Scheduler = () => {
         setSelectedSlot(null);
     };
 
+    const onMonthSelect = (date: Date) => {
+        setMonthSelection(true);
+        setMonthData(null);
+        const lastDay = new Date(date.getFullYear(),
+            date.getMonth(), daysInMonth(date.getMonth() + 1,
+                date.getFullYear()));
+
+        const monthStartTimestamp = convertDateStringToTimestamp(new Date(date).toString());
+        const monthEndTimestamp = convertDateStringToTimestamp(lastDay.toString());
+        setLastDayTimestamp(monthEndTimestamp);
+
+        const today = convertTimestampToDate(monthStartTimestamp!);
+        const tomorrow = convertTimestampToDate(monthEndTimestamp!);
+
+        fetchTimeSlots(today, tomorrow);
+    };
+
     return (
         <div className='booking-wrapper'>
             <div className='booking-container'>
@@ -116,6 +164,7 @@ const Scheduler = () => {
                     <CalendarSection
                         onDateSelect={onDateSelect}
                         date={date}
+                        onMonthSelect={onMonthSelect}
                     />
 
                     <SlotSection

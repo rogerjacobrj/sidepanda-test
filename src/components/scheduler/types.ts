@@ -14,6 +14,7 @@ export type SelctedSlot = {
 
 export type CalendarSectionProps = {
     onDateSelect: (date: DateValue) => void;
+    onMonthSelect?: (date: Date) => void;
     date: DateValue;
 };
 
@@ -73,3 +74,8 @@ export type ValidationErrors = {
     name?: string;
     email?: string;
 };
+
+export type MonthData = {
+    date: string;
+    slots: Slot[];
+}

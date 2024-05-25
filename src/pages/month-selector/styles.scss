@@ -1,0 +1,382 @@
+#root {
+  width: 100%;
+}
+
+.booking-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 6.25rem;
+  margin-bottom: 1.25rem;
+  padding: 0 1rem;
+
+  .booking-container {
+    min-height: 35.75rem;
+    display: flex;
+    flex-direction: column;
+    margin-top: 1.5rem;
+  }
+
+  .calendar-slot-wrapper {
+    display: flex;
+    min-height: 30.125rem;
+    flex-direction: column;
+
+    .calendar {
+      background-color: #EBEBF0;
+      border-top-left-radius: 0.75rem;
+      border-top-right-radius: 0.75rem;
+      padding: 0 1.25rem 1.25rem 1.25rem;
+
+      .calendar-title {
+        font-size: 1.5rem;
+        font-weight: 600;
+        line-height: 2.25rem;
+        letter-spacing: 0.015625rem;
+        text-align: left;
+        margin-top: 2.5rem;
+      }
+
+      .calendar-timezone {
+        font-size: 0.875rem;
+        font-weight: 400;
+        line-height: 1.3125rem;
+        text-align: left;
+        margin-bottom: 1.25rem;
+      }
+
+      .react-calendar {
+        border: 0.0625rem solid #C7C9D9;
+        border-radius: 0.75rem;
+        width: auto;
+      }
+
+      .custom-calendar-title {
+        color: #333333;
+      }
+
+      .react-calendar__month-view__weekdays__weekday {
+        color: #378760;
+        text-transform: capitalize;
+        font-size: 0.875rem;
+        font-weight: 600;
+        line-height: 1.3125rem;
+      }
+
+      abbr[title] {
+        text-decoration: none;
+      }
+
+      .react-calendar__navigation__label__labelText {
+        color: #333333;
+        text-transform: uppercase;
+        font-size: 1rem;
+        font-weight: 500;
+        line-height: 1.6875rem;
+        text-align: left;
+      }
+
+      .react-calendar__tile--active {
+        padding: 0rem;
+        background-color: #378760;
+        font-size: 0.875rem;
+        font-weight: 500;
+        line-height: 1.3125rem;
+        text-align: center;
+        color: #FFFFFF;
+        border-radius: 6.1875rem;
+      }
+
+      .react-calendar__navigation__prev2-button,
+      .react-calendar__navigation__next2-button {
+        display: none;
+      }
+
+      .react-calendar__navigation__prev-button,
+      .react-calendar__navigation__next-button {
+        color: #378760;
+        font-size: 1.375rem;
+        margin: 0 1rem;
+      }
+
+      .react-calendar__tile:enabled:hover,
+      .react-calendar__tile:enabled:focus {
+        background-color: #378760;
+        border-radius: 6.1875rem;
+        color: #FFFFFF;
+      }
+
+      .react-calendar__tile--now {
+        border-radius: 6.1875rem;
+      }
+
+      .react-calendar__tile:disabled,
+      .react-calendar__navigation button:disabled {
+        background-color: #fff;
+        color: #ababab;
+        cursor: not-allowed;
+      }
+    }
+
+    .time-slot {
+      background-color: #FFFFFF;
+      padding: 2.5rem;
+
+      .loader-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+
+        .loader {
+          border: 0.3125rem solid #FFF;
+          border-radius: 50%;
+          border-top: 0.3125rem solid #378760;
+          width: 3.125rem;
+          height: 3.125rem;
+          animation: spin 2s linear infinite;
+        }
+
+        @keyframes spin {
+          0% {
+            transform: rotate(0deg);
+          }
+
+          100% {
+            transform: rotate(360deg);
+          }
+        }
+      }
+
+      .variant-selection {
+        display: flex;
+        flex-direction: column;
+
+        label {
+          font-size: 0.75rem;
+          font-weight: 600;
+          line-height: 1.3125rem;
+          text-align: left;
+          color: #555770;
+          text-transform: uppercase;
+        }
+
+        select {
+          border: 0.0625rem solid #C7C9D9;
+          padding: 0.75rem;
+          color: #378760;
+          border-radius: 0.625rem;
+        }
+      }
+
+      .divider {
+        background-color: #C7C9D9;
+        height: 0.0625rem;
+        margin: 1.25rem 0;
+      }
+
+      .slot-section {
+        .slot-date {
+          font-size: 0.75rem;
+          font-weight: 600;
+          line-height: 1.3125rem;
+          text-align: left;
+          color: #555770;
+          text-transform: uppercase;
+          margin-bottom: 0.375rem;
+        }
+
+        .slots {
+          min-height: 16.5625rem;
+          max-height: 16.5625rem;
+          overflow: scroll;
+
+          .slot {
+            color: #378760;
+            background-color: #FFFFFF;
+            font-family: Poppins;
+            font-size: 0.875rem;
+            font-weight: 600;
+            line-height: 1.3125rem;
+            text-align: center;
+            border: 0.0625rem solid #378760;
+            border-radius: 0.625rem;
+            padding: 0.8125rem 0;
+            margin-bottom: 0.9375rem;
+
+            &:hover {
+              background-color: #378760;
+              color: #FFFFFF;
+            }
+          }
+
+          .active {
+            background-color: #378760;
+            color: #FFFFFF;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-left: 0.75rem;
+            padding-right: 0.5625rem;
+          }
+        }
+
+        .empty-slot {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          .empty-text {
+            margin-top: 4rem;
+            font-size: 0.8125rem;
+          }
+        }
+      }
+
+      .get-started {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        text-align: center;
+        color: #378760;
+        line-height: 1.875rem;
+
+        .start-button {
+          border: 0.0625rem solid #378760;
+          color: #378760;
+          background-color: #FFFFFF;
+          padding: 0.5rem 1.25rem;
+          border-radius: 2.5rem;
+          transition: all 0.2s ease-in-out;
+          font-size: 1rem;
+          font-weight: 500;
+          line-height: 1.5rem;
+
+          &:hover {
+            cursor: pointer;
+            background-color: #378760;
+            color: #FFFFFF;
+          }
+        }
+      }
+
+      .slot-error {
+        color: #f00;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+      }
+    }
+  }
+
+  .calendar-footer {
+    background-color: #378760;
+    color: #FFFFFF;
+    padding: 1.8125rem 2.5rem;
+    border-bottom-left-radius: 0.75rem;
+    border-bottom-right-radius: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column-reverse;
+
+    .author {
+      font-size: 0.75rem;
+      font-weight: 600;
+      line-height: 1.3125rem;
+      text-align: left;
+      text-transform: uppercase;
+      margin-top: 1rem;
+
+      a {
+        color: #FFFFFF;
+      }
+    }
+
+    .footer-btn {
+      .arrow {
+        border: solid #378760;
+        border-width: 0 0.1875rem 0.1875rem 0;
+        display: inline-block;
+        padding: 0.1875rem;
+        margin-left: 0.5rem;
+      }
+
+      .right {
+        transform: rotate(-45deg);
+        -webkit-transform: rotate(-45deg);
+      }
+
+      .next-btn {
+        width: 11.25rem;
+        height: 3rem;
+        border-radius: 0.625rem;
+        border: none;
+        color: #555770;
+        font-size: 0.875rem;
+        font-weight: 600;
+        line-height: 1.3125rem;
+      }
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .booking-wrapper {
+    margin-top: 9.375rem;
+
+    .booking-container {
+      margin-top: 1rem;
+
+      .calendar-slot-wrapper {
+        .calendar {
+          padding: 0 2.5rem 2.5rem 2.5rem;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 992px) {
+  .booking-wrapper {
+    .booking-container {
+      min-width: 58rem;
+      margin-top: 1rem;
+
+      .calendar-slot-wrapper {
+        flex-direction: row;
+
+        .calendar {
+          min-width: 25rem;
+          max-width: 25rem;
+          border-top-right-radius: 0rem;
+        }
+
+        .time-slot {
+          min-width: 25rem;
+          max-width: 25rem;
+
+          .slot-section {
+            .empty-slot {
+              .empty-text {
+                margin-top: 7rem;
+                font-size: 0.9375rem;
+              }
+            }
+          }
+        }
+      }
+
+      .calendar-footer {
+        flex-direction: row;
+
+        .author {
+          margin: 0;
+        }
+      }
+    }
+  }
+}

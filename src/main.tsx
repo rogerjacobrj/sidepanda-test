@@ -4,6 +4,7 @@ import './index.scss';
 import 'react-calendar/dist/Calendar.css';
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from './pages/home';
+import MonthSelector from './pages/month-selector';
 import ContactUs from './pages/contact-us';
 import AboutUs from './pages/about-us';
 import Leadership from './pages/leadership';
@@ -12,6 +13,10 @@ const router = createBrowserRouter([
   {
     path: "/",
     Component: Home
+  },
+  {
+    path: "/month-selector",
+    Component: MonthSelector
   },
   {
     path: "/contact-us",

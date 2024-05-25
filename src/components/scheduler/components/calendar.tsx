@@ -3,7 +3,7 @@ import { CalendarSectionProps } from "../types";
 
 const CalendarSection = (props: CalendarSectionProps) => {
 
-    const { onDateSelect, date } = props;
+    const { onDateSelect, date, onMonthSelect } = props;
 
     return (
         <div className='calendar'>
@@ -16,6 +16,7 @@ const CalendarSection = (props: CalendarSectionProps) => {
                     tileClassName="custom-calendar-title"
                     onChange={onDateSelect}
                     value={date}
+                    onClickMonth={onMonthSelect}
                 />
             </div>
         </div>

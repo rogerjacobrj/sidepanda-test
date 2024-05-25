@@ -70,3 +70,13 @@ export const calculateDuration = (timeObject: Time): number => {
 
     return minutes;
 };
+
+export const daysInMonth = (month: number, year: number): number => {
+    return new Date(year, month, 0).getDate();
+};
+
+export const getFirstDayOfMonth = (timestamp: number) => {
+    const date = new Date(timestamp);
+    date.setDate(1);
+    return date.getTime();
+};
