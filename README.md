@@ -18,6 +18,10 @@ The application can be accessed using the following links
 - Visit [sidepanda appointment scheduler](https://sidepanda.rogerjacob.com) to view the application online
 - Navigate to [localhost](http://localhost:5173) to view the application locally
 
+### Pages
+- Visit [https://sidepanda.rogerjacob.com](https://sidepanda.rogerjacob.com) to get data based on individual date selections
+- Visit [https://sidepanda.rogerjacob.com/month-selector](https://sidepanda.rogerjacob.com/month-selector) to get data based on dates based on month selections
+
 ## Run application locally
 
 Follow the below steps to configure and run the application locally
