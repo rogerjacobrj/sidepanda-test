@@ -4,6 +4,7 @@ import { Slot, SlotListProps } from "../types";
 const SlotList = (props: SlotListProps) => {
 
     const { timestamp, slots, selectedSlot, chooseSlot } = props;
+    
     return (
         <div className='slot-section'>
             <div className='slot-date'>
